@@ -23,7 +23,11 @@
                    name="email"
                    required
                    pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
-            >
+                   #email="ngModel">
+            <!-- ngModel exports the control that got created by ng2 -->
+            <div *ngIf="!email.valid">
+                Invalid Email
+            </div>
         </div>
     </div>
     <div class="form-group">
@@ -45,5 +49,5 @@
             {{g}}
         </label>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
 </form>
