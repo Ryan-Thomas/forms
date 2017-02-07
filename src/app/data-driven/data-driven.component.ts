@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
+import {validateConfig} from '@angular/router/src/config';
 
 @Component({
   moduleId: module.id,
@@ -25,7 +26,15 @@ export class DataDrivenComponent {
       }),
       'password': new FormControl('', Validators.required),
       'gender': new FormControl('male'),
+      'hobbies': new FormArray([
+        new FormControl('Cooking', Validators.required),
+      ]),
     });
+  }
+
+  onAddHobby() {
+    console.log('this.myForm.controls', this.myForm.controls);
+    (<FormArray>this.myForm.controls['hobbies']).push(new FormControl('', Validators.required));
   }
 
   onSubmit(form) {

@@ -32,13 +32,14 @@
             {{g}}
         </label>
     </div>
-    <div>
+    <!-- formArrayName tells ng2 that everything inside the div belongs to that group -->
+    <div formArrayName="hobbies">
         <h3>Hobbies</h3>
-        <div class="form-group">
+        <div class="form-group" *ngFor="let hobby of myForm.controls['hobbies'].controls; let i = index">
             <input type="text"
-                   class="form-control">
+                   class="form-control" formControlName="{{i}}">
         </div>
     </div>
-    <button type="button" class="btn btn-default">Add Hobby</button>
+    <button type="button" class="btn btn-default" (click)="onAddHobby()">Add Hobby</button>
     <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Submit</button>
 </form>
