@@ -6,5 +6,4 @@ import { Component } from '@angular/core';
     templateUrl: 'data-driven.component.html'
 })
 export class DataDrivenComponent {
-
 }
