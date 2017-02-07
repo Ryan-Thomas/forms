@@ -2,13 +2,13 @@
 <!-- ngSubmit specifies the code that is executed when submit is clicked -->
 <!-- Here we assign a local reference to the form ng2 created in the background -->
 <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-    <div>
+    <div ngModelGroup="userData">
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text"
                    class="form-control"
                    id="username"
-                   ngModel
+                   [(ngModel)]="user.username"
                    name="username"
                    required
             >
@@ -19,7 +19,7 @@
             <input type="text"
                    class="form-control"
                    id="email"
-                   ngModel
+                   [(ngModel)]="user.email"
                    name="email"
                    required
                    pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
@@ -31,13 +31,18 @@
         <input type="password"
                class="form-control"
                id="password"
-               ngModel
+               [(ngModel)]="user.password"
                name="password"
                required
         >
     </div>
-    <div class="radio">
+    <div class="radio" *ngFor="let g of genders">
         <label>
+            <input type="radio"
+                   name="gender"
+                   [(ngModel)]="user.gender"
+                   [value]="g">
+            {{g}}
         </label>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
