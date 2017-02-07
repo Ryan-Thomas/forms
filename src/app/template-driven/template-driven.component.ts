@@ -4,7 +4,12 @@ import {NgForm} from '@angular/forms';
 @Component({
   moduleId: module.id,
   selector: 'app-template-driven',
-  templateUrl: 'template-driven.component.html'
+  templateUrl: 'template-driven.component.html',
+  styles: [`
+    .ng-invalid {
+      border: 1px solid red;
+    }
+  `]
 })
 export class TemplateDrivenComponent {
 
