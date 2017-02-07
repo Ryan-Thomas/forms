@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {NgForm} from '@angular/forms';
 
 @Component({
   moduleId: module.id,
@@ -6,4 +7,8 @@ import { Component } from '@angular/core';
   templateUrl: 'template-driven.component.html'
 })
 export class TemplateDrivenComponent {
+
+  onSubmit(form: NgForm) {
+    console.log('form', form);
+  }
 }

@@ -1,28 +1,37 @@
 <h1>Template Driven</h1>
-<form>
-  <div>
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input type="text"
-             class="form-control"
-             id="username">
+<!-- ngSubmit specifies the code that is executed when submit is clicked -->
+<!-- Here we assign a local reference to the form ng2 created in the background -->
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text"
+                   class="form-control"
+                   id="username"
+                   ngModel
+                   name="username">
+            <!-- ngModel means that this is a form, please control it -->
+        </div>
+        <div class="form-group">
+            <label for="email">E-Mail</label>
+            <input type="text"
+                   class="form-control"
+                   id="email"
+                   ngModel
+                   name="email">
+        </div>
     </div>
     <div class="form-group">
-      <label for="email">E-Mail</label>
-      <input type="text"
-             class="form-control"
-             id="email">
+        <label for="password">Password</label>
+        <input type="password"
+               class="form-control"
+               id="password"
+               ngModel
+               name="password">
     </div>
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password"
-           class="form-control"
-           id="password">
-  </div>
-  <div class="radio">
-    <label>
-    </label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="radio">
+        <label>
+        </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
