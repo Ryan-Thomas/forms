@@ -19,7 +19,7 @@ export class DataDrivenComponent {
     //noinspection TsLint
     this.myForm = fb.group({
       'userData': fb.group({
-        'username': ['Max', Validators.required],
+        'username': ['Max', [Validators.required, this.exampleValidator]],
         // 'username': new FormControl('Max', Validators.required),
         'email': ['', [
           Validators.required,
@@ -32,30 +32,21 @@ export class DataDrivenComponent {
         ['Cooking', Validators.required],
       ]),
     });
-    //
-    // // noinspection TsLint
-    // this.myForm = new FormGroup({
-    //   'userData': new FormGroup({
-    //     'username': new FormControl('Max', Validators.required),
-    //     'email': new FormControl('', [
-    //       Validators.required,
-    //       Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")]),
-    //   }),
-    //   'password': new FormControl('', Validators.required),
-    //   'gender': new FormControl('male'),
-    //   'hobbies': new FormArray([
-    //     new FormControl('Cooking', Validators.required),
-    //   ]),
-    // });
-
   }
 
-  onAddHobby() {
+  onAddHobby(): void {
     console.log('this.myForm.controls', this.myForm.controls);
     (<FormArray>this.myForm.controls['hobbies']).push(new FormControl('', Validators.required));
   }
 
-  onSubmit(form) {
+  onSubmit(form): void {
     console.log('form', form);
+  }
+
+  exampleValidator(control: FormControl): {[s: string]: boolean} {
+    if (control.value === 'Example') {
+      return {example: true};
+    }
+    return null;
   }
 }
