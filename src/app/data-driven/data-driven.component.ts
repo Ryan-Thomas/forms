@@ -34,6 +34,12 @@ export class DataDrivenComponent {
         ['Cooking', Validators.required, this.asyncExampleValidator],
       ]),
     });
+
+    this.myForm.statusChanges.subscribe(
+      (data: any) => {
+        console.log(data);
+      }
+    );
   }
 
   onAddHobby(): void {
