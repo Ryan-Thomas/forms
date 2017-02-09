@@ -1,6 +1,8 @@
 import {Component, Inject} from '@angular/core';
 import {FormGroup, FormControl, Validators, FormArray, FormBuilder} from '@angular/forms';
 import {validateConfig} from '@angular/router/src/config';
+import {Observable} from 'rxjs';
+import any = jasmine.any;
 
 @Component({
   moduleId: module.id,
@@ -29,24 +31,41 @@ export class DataDrivenComponent {
       'password': ['', Validators.required],
       'gender': ['male'],
       'hobbies': fb.array([
-        ['Cooking', Validators.required],
+        ['Cooking', Validators.required, this.asyncExampleValidator],
       ]),
     });
   }
 
   onAddHobby(): void {
     console.log('this.myForm.controls', this.myForm.controls);
-    (<FormArray>this.myForm.controls['hobbies']).push(new FormControl('', Validators.required));
+    (<FormArray>this.myForm.controls['hobbies'])
+      .push(new FormControl('', Validators.required, this.asyncExampleValidator));
   }
 
   onSubmit(form): void {
     console.log('form', form);
   }
 
+  // If you resolve anything other than null, the validator will have failed.
   exampleValidator(control: FormControl): {[s: string]: boolean} {
     if (control.value === 'Example') {
       return {example: true};
     }
     return null;
+  }
+
+  asyncExampleValidator(control: FormControl): Promise<any> | Observable<any> {
+    const promise = new Promise<any>(
+      (resolve, reject) => {
+        setTimeout(() => {
+          if (control.value === 'Example') {
+            resolve({'invalid': true});
+          } else {
+            resolve(null);
+          }
+        }, 1500);
+      }
+    );
+    return promise;
   }
 }
